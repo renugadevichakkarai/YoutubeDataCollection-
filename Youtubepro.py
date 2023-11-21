@@ -443,7 +443,7 @@ def show_channels_table():
 def show_playlists_table():
     pl_list=[]
     db=client["Youtube_Data"]
-    coll1=db["chennal_details"]
+    coll1=db["channel_details"]
     for pl_data in coll1.find({},{"_id":0,"playlist_information":1}):
         for i in range(len(pl_data["playlist_information"])):
             pl_list.append(pl_data["playlist_information"][i])
@@ -454,7 +454,7 @@ def show_playlists_table():
 def show_videos_table():
     vi_list=[]
     db=client["Youtube_Data"]
-    coll1=db["chennal_details"]
+    coll1=db["channel_details"]
     for vi_data in coll1.find({},{"_id":0,"video_information":1}):
         for i in range(len(vi_data["video_information"])):
             vi_list.append(vi_data["video_information"][i])
@@ -465,7 +465,7 @@ def show_videos_table():
 def show_comments_table():
     com_list=[]
     db=client["Youtube_Data"]
-    coll1=db["chennal_details"]
+    coll1=db["channel_details"]
     for com_data in coll1.find({},{"_id":0,"comment_information":1}):
         for i in range(len(com_data["comment_information"])):
             com_list.append(com_data["comment_information"][i])
@@ -493,12 +493,12 @@ if st.button("Collect and Store data"):
     for ch_data in coll1.find({},{"_id":0,"channel_information":1}):
         ch_ids.append(ch_data["channel_information"]["Channel_Id"])
 
-        if channel_id in ch_ids:
-            st.success("channel details of the given channel id is already exists")
+    if channel_id in ch_ids:
+        st.success("channel details of the given channel id is already exists")
             
-        else:
-            insert=channel_details(channel_id)
-            st.success(insert)
+    else:
+        insert=channel_details(channel_id)
+        st.success(insert)
 
 
 if st.button("Migrate to SQL"):
